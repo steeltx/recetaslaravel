@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Receta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RecetaController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -35,7 +41,17 @@ class RecetaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $data = $request->validate([
+            'titulo' => 'required|min:6'
+        ]);
+
+        DB::table('recetas')->insert([
+            'titulo' => $data['titulo']
+        ]);
+
+        //redireccionar
+        return redirect()->action('RecetaController@index');
     }
 
     /**

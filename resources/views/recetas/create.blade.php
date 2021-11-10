@@ -10,15 +10,22 @@
 
     <div class="row justify-content-center mt-5">
         <div class="col-md-8">
-            <form method="POST">
+            <form method="POST" action="{{ route('recetas.store')}}">
+                @csrf
                 <div class="form-group">
                     <label for="titulo">Titulo Receta</label>
                     <input  type="text"
                             name="titulo"
-                            class="form-control"
+                            class="form-control @error('titulo') is-invalid @enderror"
                             id="titulo"
                             placeholder="Titulo receta"
+                            value={{ old('titulo')}}
                     />
+                    @error('titulo')
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{$message}}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <input type="submit" class="btn btn-primary" value="Agregar receta">
