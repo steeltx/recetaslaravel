@@ -14,7 +14,7 @@ class RecetaController extends Controller
      */
     public function index()
     {
-        //
+        return view('recetas.index');
     }
 
     /**
@@ -24,7 +24,7 @@ class RecetaController extends Controller
      */
     public function create()
     {
-        //
+        return view('recetas.create');
     }
 
     /**
