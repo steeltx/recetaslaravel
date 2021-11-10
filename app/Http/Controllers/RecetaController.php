@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CategoriaReceta;
 use App\Receta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -35,7 +36,11 @@ class RecetaController extends Controller
     public function create()
     {
 
-        $categorias = DB::table('categoria_receta')->get()->pluck('nombre','id');
+        // obtener categorias sin modelo
+        // $categorias = DB::table('categoria_recetas')->get()->pluck('nombre','id');
+
+        // usando modelos
+        $categorias = CategoriaReceta::all(['id','nombre']);
 
         return view('recetas.create')->with('categorias',$categorias);
     }
@@ -66,12 +71,21 @@ class RecetaController extends Controller
         $img->save();
 
         // almacen en BD sin modelo
-        DB::table('recetas')->insert([
+        // DB::table('recetas')->insert([
+        //     'titulo' => $data['titulo'],
+        //     'preparacion' => $data['preparacion'],
+        //     'ingredientes' => $data['ingredientes'],
+        //     'imagen' => $ruta_imagen,
+        //     'user_id' => Auth::user()->id, // obtener el usuario que inicio sesion
+        //     'categoria_id'=> $data['categoria']
+        // ]);
+
+        // guardar con modelo
+        auth()->user()->recetas()->create([
             'titulo' => $data['titulo'],
             'preparacion' => $data['preparacion'],
             'ingredientes' => $data['ingredientes'],
             'imagen' => $ruta_imagen,
-            'user_id' => Auth::user()->id, // obtener el usuario que inicio sesion
             'categoria_id'=> $data['categoria']
         ]);
 
