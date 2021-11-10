@@ -15,7 +15,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
+    @yield('styles')
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
@@ -79,9 +79,10 @@
                 </div>
                 <main class="py-4 mt-5 col-12">
                     @yield('content')
-                </main
+                </main>
             </div>
         </div>
     </div>
+    @yield('scripts')
 </body>
 </html>

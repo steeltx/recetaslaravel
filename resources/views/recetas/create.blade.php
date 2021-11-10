@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@section('styles')
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.css" integrity="sha512-5m1IeUDKtuFGvfgz32VVD0Jd/ySGX7xdLxhqemTmThxHdgqlgPdupWoSN8ThtUSLpAGBvA8DY2oO7jJCrGdxoA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+@endsection
+
 @section('botones')
     <a href="{{route('recetas.index')}}" class="btn btn-primary mr-2 text-white">Volver</a>
 @endsection
@@ -20,8 +26,52 @@
                             id="titulo"
                             placeholder="Titulo receta"
                             value={{ old('titulo')}}
-                    />
+                    >
                     @error('titulo')
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{$message}}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="categoria">Categoría</label>
+                    <select
+                        name="categoria"
+                        class="form-control  @error('categoria') is-invalid @enderror"
+                        id="categoria"
+                    >
+                        <option value="">-- Seleccione --</option>
+                        @foreach ($categorias as $id =>  $categoria)
+                            <option
+                                value="{{$id}}" {{ old('categoria') == $id ? 'selected' : ''}}
+                                >{{$categoria}}</option>
+                        @endforeach
+                    </select>
+                    @error('categoria')
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{$message}}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group mt-3">
+                    <label for="preparacion">Preparación</label>
+                    <input type="hidden" name="preparacion" value={{ old('preparacion') }}>
+                    <trix-editor
+                        class="@error('preparacion') is-invalid @enderror"
+                        input="preparacion"></trix-editor>
+                    @error('preparacion')
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{$message}}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group mt-3">
+                    <label for="ingredientes">Ingredientes</label>
+                    <input type="hidden" name="ingredientes" value={{ old('ingredientes') }}>
+                    <trix-editor
+                        class="@error('preparacion') is-invalid @enderror"
+                        input="ingredientes"></trix-editor>
+                    @error('ingredientes')
                         <span class="invalid-feedback d-block" role="alert">
                             <strong>{{$message}}</strong>
                         </span>
@@ -34,4 +84,9 @@
         </div>
     </div>
 
+@endsection
+
+
+@section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.js" integrity="sha512-/1nVu72YEESEbcmhE/EvjH/RxTg62EKvYWLG3NdeZibTCuEtW5M4z3aypcvsoZw03FAopi94y04GhuqRU9p+CQ==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
 @endsection
