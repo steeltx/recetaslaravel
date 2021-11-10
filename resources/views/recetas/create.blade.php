@@ -16,7 +16,7 @@
 
     <div class="row justify-content-center mt-5">
         <div class="col-md-8">
-            <form method="POST" action="{{ route('recetas.store')}}">
+            <form method="POST" action="{{ route('recetas.store')}}" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="titulo">Titulo Receta</label>
@@ -55,7 +55,7 @@
                 </div>
                 <div class="form-group mt-3">
                     <label for="preparacion">Preparación</label>
-                    <input type="hidden" name="preparacion" value={{ old('preparacion') }}>
+                    <input id="preparacion" type="hidden" name="preparacion" value={{ old('preparacion') }}>
                     <trix-editor
                         class="@error('preparacion') is-invalid @enderror"
                         input="preparacion"></trix-editor>
@@ -67,11 +67,24 @@
                 </div>
                 <div class="form-group mt-3">
                     <label for="ingredientes">Ingredientes</label>
-                    <input type="hidden" name="ingredientes" value={{ old('ingredientes') }}>
+                    <input id="ingredientes" type="hidden" name="ingredientes" value={{ old('ingredientes') }}>
                     <trix-editor
-                        class="@error('preparacion') is-invalid @enderror"
+                        class="@error('ingredientes') is-invalid @enderror"
                         input="ingredientes"></trix-editor>
                     @error('ingredientes')
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{$message}}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group mt-3">
+                    <label for="imagen">Selecciona la imagen</label>
+                    <input
+                        type="file"
+                        class="form-control @error('imagen') is-invalid @enderror"
+                        id="imagen"
+                        name="imagen">
+                    @error('imagen')
                         <span class="invalid-feedback d-block" role="alert">
                             <strong>{{$message}}</strong>
                         </span>
