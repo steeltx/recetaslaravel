@@ -23,7 +23,6 @@ class RecetaController extends Controller
      */
     public function index()
     {
-        Auth::user()->recetas;
         $recetas = Auth::user()->recetas;
         return view('recetas.index')->with('recetas',$recetas);
     }
