@@ -12,12 +12,13 @@
 
 @section('content')
 
-    <h2 class="text-center mb-5">Crear nueva receta</h2>
+    <h2 class="text-center mb-5">Edita receta : {{$receta->titulo}}</h2>
 
     <div class="row justify-content-center mt-5">
         <div class="col-md-8">
-            <form method="POST" action="{{ route('recetas.store')}}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('recetas.update',['receta' => $receta->id] )}}" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
                 <div class="form-group">
                     <label for="titulo">Titulo Receta</label>
                     <input  type="text"
@@ -25,7 +26,7 @@
                             class="form-control @error('titulo') is-invalid @enderror"
                             id="titulo"
                             placeholder="Titulo receta"
-                            value="{{ old('titulo')}}"
+                            value="{{$receta->titulo}}"
                     >
                     @error('titulo')
                         <span class="invalid-feedback d-block" role="alert">
@@ -43,7 +44,7 @@
                         <option value="">-- Seleccione --</option>
                         @foreach ($categorias as $categoria)
                             <option
-                                value="{{$categoria->id}}" {{ old('categoria') == $categoria->id ? 'selected' : ''}}
+                                value="{{$categoria->id}}" {{ $receta->categoria_id == $categoria->id ? 'selected' : ''}}
                                 >{{$categoria->nombre}}</option>
                         @endforeach
                     </select>
@@ -55,7 +56,7 @@
                 </div>
                 <div class="form-group mt-3">
                     <label for="preparacion">Preparación</label>
-                    <input id="preparacion" type="hidden" name="preparacion" value={{ old('preparacion') }}>
+                    <input id="preparacion" type="hidden" name="preparacion" value={{ $receta->preparacion }}>
                     <trix-editor
                         class="@error('preparacion') is-invalid @enderror"
                         input="preparacion"></trix-editor>
@@ -67,7 +68,7 @@
                 </div>
                 <div class="form-group mt-3">
                     <label for="ingredientes">Ingredientes</label>
-                    <input id="ingredientes" type="hidden" name="ingredientes" value={{ old('ingredientes') }}>
+                    <input id="ingredientes" type="hidden" name="ingredientes" value={{ $receta->ingredientes }}>
                     <trix-editor
                         class="@error('ingredientes') is-invalid @enderror"
                         input="ingredientes"></trix-editor>
@@ -84,6 +85,10 @@
                         class="form-control @error('imagen') is-invalid @enderror"
                         id="imagen"
                         name="imagen">
+                    <div mt-4>
+                        <p>Imagen actual</p>
+                        <img src="/storage/{{$receta->imagen}}" style="width: 300px">
+                    </div>
                     @error('imagen')
                         <span class="invalid-feedback d-block" role="alert">
                             <strong>{{$message}}</strong>
@@ -91,7 +96,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-primary" value="Agregar receta">
+                    <input type="submit" class="btn btn-primary" value="Actualizar receta">
                 </div>
             </form>
         </div>
