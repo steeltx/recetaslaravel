@@ -37,9 +37,13 @@
             <h2 class="titulo-categoria text-uppercase mt-5 mb-4">{{str_replace('-',' ',$key)}}</h2>
             <div class="row">
                 @foreach ($grupo as $recetas)
-                    @foreach ($recetas as $receta)
-                        @include('ui.receta')
-                    @endforeach
+                    @if(count($recetas) > 0)
+                        @foreach ($recetas as $receta)
+                            @include('ui.receta')
+                        @endforeach
+                    @else
+                        <p class="text-primary font-weight-bold ml-3">No hay recetas ...</p>
+                    @endif
                 @endforeach
             </div>
         </div>
