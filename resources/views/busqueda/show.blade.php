@@ -7,9 +7,13 @@
             Resultados búsqueda : {{$busqueda}}
         </h2>
         <div class="row">
-            @foreach ($recetas as $receta)
-                @include('ui.receta')
-            @endforeach
+            @if(count($recetas) > 0)
+                @foreach ($recetas as $receta)
+                    @include('ui.receta')
+                @endforeach
+            @else
+                <p class="text-primary font-weight-bold">No hay resultados para la búsqueda</p>
+            @endif
         </div>
         <div class="d-flex justify-content-center mt-5">
             {{$recetas->links() }}

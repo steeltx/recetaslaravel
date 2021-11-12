@@ -199,8 +199,7 @@ class RecetaController extends Controller
         //$busqueda = $request['buscar'];
         $busqueda = $request->get('buscar');
 
-
-        $recetas = Receta::where('titulo','like', '%'.$busqueda.'%')->paginate(1);
+        $recetas = Receta::where('titulo','like', '%'.$busqueda.'%')->paginate(3);
         $recetas->appends(['buscar' => $busqueda]);
 
         return view('busqueda.show',compact('recetas','busqueda'));
