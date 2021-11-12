@@ -11,7 +11,7 @@
             </div>
             <div class="col-md-7 mt-5 mt-md-0">
                 <h2 class="text-center mb-2 text-primary">{{$perfil->usuario->name}}</h2>
-                <a href="{{$perfil->usuario->url}}">Visitar Sitio Web</a>
+                <a href="{{$perfil->usuario->url}}" target="_blank">Visitar Sitio Web</a>
                 <div class="biografia">
                     {!! $perfil->biografia !!}
                 </div>
@@ -30,7 +30,9 @@
                             <img src="/storage/{{$receta->imagen}}" class="card-img-top" alt="imagen receta">
                             <div class="card-body">
                                 <h3>{{$receta->titulo}}</h3>
-                                <a href="{{ route('recetas.show',['receta' => $receta->id])}}" class="btn btn-primary d-block mt-4 text-uppercase font-weight-bold">Ver receta</a>
+                                <a
+                                    href="{{ route('recetas.show',['receta' => $receta->id])}}"
+                                    class="btn btn-primary d-block mt-4 text-uppercase font-weight-bold">Ver receta</a>
                             </div>
                         </div>
                     </div>

@@ -15,6 +15,9 @@
                 <p class="text-primary font-weight-bold">No hay resultados para la búsqueda</p>
             @endif
         </div>
+        <div class="col-12 mt-4 d-flex">
+            <span class="badge badge-dark">Total de registros : {{$recetas->total()}}</span>
+        </div>
         <div class="d-flex justify-content-center mt-5">
             {{$recetas->links() }}
         </div>

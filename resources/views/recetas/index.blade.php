@@ -31,6 +31,9 @@
             @endforeach
         </tbody>
     </table>
+    <div class="col-12 mt-4 d-flex">
+        <span class="badge badge-dark">Total de registros : {{$recetas->total()}}</span>
+    </div>
     <div class="col-12 mt-4 justify-content-center d-flex">
         {{ $recetas->links() }}
     </div>
